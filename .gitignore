@@ -13,6 +13,9 @@ lib-cov
 ### assets ###
 *.css
 
+### config ###
+.env
+
 pids
 logs
 results
