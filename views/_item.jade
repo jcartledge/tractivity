@@ -2,5 +2,6 @@ li.item
   a(
     href=storyURL(item.stories.story.id),
     target='_blank'
-  )= item.description
-  time(class=time,datetime=item.occurred_at)= item.occurred_at
+  )
+    = item.description
+    time(class=time,datetime=item.occurred_at)= item.occurred_at
