@@ -3,4 +3,4 @@ p
     href=storyURL(activity.stories.story.id),
     target='_blank'
   )= activity.description
-  small= timestamp(activity.occurred_at)
+  small(data-time=activity.occurred_at)= timestamp(activity.occurred_at)
