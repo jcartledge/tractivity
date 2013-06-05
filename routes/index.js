@@ -13,17 +13,12 @@ console.log('pivotalProject', pivotalProject);
 pivotal.useToken(pivotalToken);
 
 exports.index = function(req, res) {
-
-  console.log(req.get('since'));
-  pivotal.getProjectActivities(pivotalProject, req.get, function (err, ret) {
-    console.log(err, ret);
+  pivotal.getProjectActivities(pivotalProject, req.query, function (err, ret) {
     if (!err) {
-      if(req.xhr) {
-        res.json(ret.activity);
-      } else {
-        res.render('index', {activities: ret.activity});
-      }
-    }
+      res.render(req.xhr ? '_items' : 'index', {
+        items: ret.activity ? [].concat(ret.activity) : []
+      });
+    } // else error
   });
 
 };

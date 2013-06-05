@@ -1,6 +1,6 @@
 p
   a(
-    href=storyURL(activity.stories.story.id),
+    href=storyURL(item.stories.story.id),
     target='_blank'
-  )= activity.description
-  small(data-time=activity.occurred_at)= timestamp(activity.occurred_at)
+  )= item.description
+  small(data-time=item.occurred_at)= timestamp(item.occurred_at)
