@@ -1,3 +1,3 @@
 p
-  a(href=storyLink(activity))= activity.description
-  small= activity.occurred_at
+  a(href=activity.stories.story.url)= activity.description
+  small= timestamp(activity.occurred_at)

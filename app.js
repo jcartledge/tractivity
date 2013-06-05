@@ -3,10 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path');
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http'),
+    path = require('path'),
+    moment = require('moment');
 
 var app = express();
 
@@ -22,8 +23,8 @@ app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.locals.storyLink = function(activity, text) {
-  return "#";
+app.locals.timestamp = function(str) {
+  return moment(str.replace(/ EST$/, '')).fromNow();
 };
 
 // development only
