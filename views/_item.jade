@@ -3,4 +3,4 @@ li.item
     href=storyURL(item.stories.story.id),
     target='_blank'
   )= item.description
-  small(data-time=item.occurred_at)= timestamp(item.occurred_at)
+  small(class=time,datetime=item.occurred_at)= item.occurred_at

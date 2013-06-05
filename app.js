@@ -6,8 +6,7 @@
 var express = require('express'),
     routes = require('./routes'),
     http = require('http'),
-    path = require('path'),
-    moment = require('moment');
+    path = require('path');
 
 var app = express();
 
@@ -24,9 +23,6 @@ app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // view helpers
-app.locals.timestamp = function(str) {
-  return moment(str.replace(/ EST$/, ' +1000')).fromNow();
-};
 app.locals.storyURL = function(id) {
   return 'https://www.pivotaltracker.com/story/show/' + id;
 };
