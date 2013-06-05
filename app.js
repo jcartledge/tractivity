@@ -24,7 +24,7 @@ app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.locals.timestamp = function(str) {
-  return moment(str.replace(/ EST$/, '')).fromNow();
+  return moment(str.replace(/ EST$/, ' +1000')).fromNow();
 };
 
 // development only
