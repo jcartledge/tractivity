@@ -10,6 +10,9 @@ lib-cov
 *.pid
 *.gz
 
+### assets ###
+*.css
+
 pids
 logs
 results
