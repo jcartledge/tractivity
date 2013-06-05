@@ -22,6 +22,10 @@ app.use(app.router);
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.locals.storyLink = function(activity, text) {
+  return "#";
+};
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
