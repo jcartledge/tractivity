@@ -14,7 +14,7 @@ $(function() {
   };
 
   var fixTime = function($el) {
-    return $el.attr('datetime').replace(/EST$/, '+1000');
+    return $el.attr('datetime').replace(/EST$/, '+1100');
   };
 
   var update = function() {
