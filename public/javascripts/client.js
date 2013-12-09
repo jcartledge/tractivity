@@ -1,41 +1,49 @@
 $(function() {
 
-  var getTimes = function($el) {
-    if (!$el) $el = $('body');
-    return $el.find('[datetime]');
-  };
+    'use strict';
 
-  var updateTimes = function(times) {
-    if(!times) times = getTimes();
-    times.each(function() {
-      var $this = $(this);
-      $this.html(moment(fixTime($this)).fromNow());
-    });
-  };
+    function getTimes($el) {
+        if (!$el) $el = $('body');
+        return $el.find('[datetime]');
+    }
 
-  var fixTime = function($el) {
-    return $el.attr('datetime').replace(/EST$/, '+1100');
-  };
+    function updateTimes(times) {
+        if(!times) times = getTimes();
+        times.each(function() {
+            var $this = $(this);
+            $this.html(moment(fixTime($this)).fromNow());
+        });
+    }
 
-  var update = function() {
-    var since = fixTime(getTimes().first());
-    var url = location.href + '?' + $.param({'occurred_since_date': since});
-    var insert = function(lis) {
-      $(lis.pop()).hide().prependTo('.items').slideDown(function() {
-        if (lis.length) {
-          insert(lis);
+    function fixTime($el) {
+        console.log(getTimeZone());
+        return $el.attr('datetime').replace(/EST$/, getTimeZone());
+    }
+
+    function getTimeZone() {
+        var tz = (new Date()).getTimezoneOffset() / -.6;
+        return tz < 0 ? tz : '+' + tz;
+    }
+
+    function update() {
+        var since = fixTime(getTimes().first());
+        var url = location.href + '?' + $.param({'occurred_since_date': since});
+        function insert(lis) {
+            $(lis.pop()).hide().prependTo('.items').slideDown(function() {
+                if (lis.length) {
+                    insert(lis);
+                }
+            });
         }
-      });
-    };
-    $.get(url, function(data) {
-      var $data = $(data);
-      updateTimes(getTimes($data));
-      insert($data.find('li').get());
-      updateTimes(getTimes());
-    });
-  };
+        $.get(url, function(data) {
+            var $data = $(data);
+            updateTimes(getTimes($data));
+            insert($data.find('li').get());
+            updateTimes(getTimes());
+        });
+    }
 
-  setInterval(update, 60 * 1000);
-  updateTimes();
+    setInterval(update, 60 * 1000);
+    updateTimes();
 
 });
